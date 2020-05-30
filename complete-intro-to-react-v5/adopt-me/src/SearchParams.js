@@ -3,7 +3,10 @@ import { ANIMALS } from "@frontendmasters/pet";
 import useDropdown from "./useDropdown";
 
 const SearchParams = () => {
-  const [location, setLocation] = useState("Seattle, WA");
+  const [location, LocationDropdown] = useDropdown("Location", "Seattle, WA", [
+    "Seattle, WA",
+    "San Francisco, CA",
+  ]);
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
   const [breeds, setBreeds] = useState([]);
   const [breed, BreedDropdown] = useDropdown("Breed", "", breeds);
@@ -11,15 +14,7 @@ const SearchParams = () => {
   return (
     <div className="search-params">
       <form>
-        <label htmlFor="location">
-          Location
-          <input
-            type="text"
-            value={location}
-            placeholder="Location"
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </label>
+        <LocationDropdown />
         <AnimalDropdown />
         <BreedDropdown />
         <button>Submit</button>
